@@ -1,0 +1,33 @@
+<style>
+  textarea {
+    margin-top : 26px;
+    height : 300px;
+  }
+</style>
+
+{% extends "base.html" %}
+
+{% block contents %}
+<form class="row g-3" action="{{url_for('mining')}}" method="POST">
+  <div class="col-auto">
+    <label for="kwd" class="visually-hidden">키워드</label>
+    <input type="text" class="form-control" name="kwd" placeholder="키워드" style="width:150px" required>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary" type="submit">입력</button>
+  </div>
+</form>
+<div class="card" style="margin-top: 26px;">
+  <div class="card-body">
+    <h5 class="card-title">결과</h5>
+    <p class="card-text">✔ 일부 블로그는 크롤링이 되지 않습니다. (ex.티스토리)<br>
+    ✔ 클릭 후 분석하는 데에 5초 정도 소요됩니다.</p>
+    <textarea class="form-control" name="result" readonly>
+      {% for keyword in keyword -%}
+      {{  keyword  }}
+      {% endfor %}
+    </textarea>
+  </div>
+</div>
+
+{% endblock contents %}

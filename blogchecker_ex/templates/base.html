@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta name="naver-site-verification" content="a3478a926837d199c184f215fa355b1dc737576c" />
+	<meta content="" name="descriptison">
+    <meta content="" name="keywords">
+    <meta property="og:title" content="블로그체커 - 블루타이머">
+    <meta name="description" content="블로그 상위노출의 핵심">
+    <meta property="og:description" content="금칙어 검사 및 텍스트마이닝">
+    <meta name="keywords" content="블루타이머, 블로그체커, 금칙어, 블로그, blog, blogchecker, 최적화">
+    <meta property="og:url" content="http://blogchecker.co.kr/"> 
+    <meta property="og:site_name" content="블로그체커"/> 
+    <meta property="og:type" content="website"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블로그체커</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+    <style>
+    @font-face {
+        font-family: 'MaruBuri-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        font-family: 'MaruBuri-Regular';
+      }
+      .main {
+        background: #3d3d3d;
+        padding: 80px;
+        padding-top: 80px;
+        padding-right: 0px;
+        padding-bottom: 80px;
+        padding-left: 00px;
+      }
+      .container{
+      max-width: 1800px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      background-color: white;
+      padding: 40px;
+      border-radius: 6px;
+    }
+    footer{
+      max-width: 1800px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding: 40px;
+      border-radius: 6px;
+    }
+    a {
+      text-decoration:none;
+      color: black;
+    }
+    .nav-link:hover {
+      color:#0D6EFD;
+    }
+    </style>
+  </head>
+  <body class="text-center" style="background:#3d3d3d">
+    <nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{url_for('index')}}">BLOGCHECKER</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" id='check' href="{{url_for('check')}}" onclick="active('check')">형태소체크</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id='mining' href="{{url_for('mining')}}" onclick="active('mining')">텍스트마이닝</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('rank')}}">순위확인</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id='cafe' href="https://cafe.naver.com/lnote/2131" onclick="message('카페에 가입하셔서 무료 강의 수강하세요!'); active('cafe');" target='_blank'>블루타이머카페</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id='ask' href="https://pf.kakao.com/_uzIxhxj" onclick="active('ask')" target='_blank'>문의하기</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" id='talk' href="#" onclick="active('talk')" target='_blank'>사용자단톡방</a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      {% if user=="Login" %}
+      <a href="{{url_for('login')}}">
+        Login</a>
+      {% else %}
+      <span class="user">{{user}}님</span>
+      <a href="{{url_for('logout')}}">로그아웃</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+    <div class=main>
+      <div class="container">
+    {% block contents %}
+
+    {% endblock contents%}
+    </div>
+    <footer style="color:white; text-align:right; font-size: 13px">
+      · 상호명 : 진커뮤니티 · 사업자등록번호 : 735-06-02130 · 통신판매업신고 : 2021-서울송파-3324호<br>
+      · 책임자 : 배도진 · 주소 : 서울 송파구 백제고분로27길 11-9 · 연락처 : 010-8671-1584 · 메일 : gojo99257@naver.com
+    </footer>
+  </div>
+  <script>
+      function message(self) {
+        alert(self);
+      }
+      function active(self) {
+        document.getElementById(self).classList.add('active');
+      }
+  </script>
+  </body>
+</html>

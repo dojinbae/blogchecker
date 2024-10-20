@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<style>
+  div {
+    text-align : left
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap : 39px;
+  }
+  textarea {
+    resize : none;
+  }
+  .textarea_grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap : 13px;
+  }
+</style>
+<div>
+  <form style="margin-bottom : 26px" class="row g-3" action="{{url_for('check')}}" method="POST">
+    <div class="col-auto">
+      <label for="blogurl" class="visually-hidden">블로그 주소</label>
+      <input type="text" class="form-control" name = 'blogurl' placeholder="블로그 주소" style="width:450px" required>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">입력</button> {{forth}}
+    </div>
+  </form>
+</div>
+<div class="grid">
+  <form action="{{url_for('check')}}" method="POST">
+    <label for="blogtext" class="visually-hidden">블로그 본문</label>
+    <textarea type="text" class="form-control" name = 'blogtext' placeholder="블로그 본문" style="width:530px; height:530px; margin-bottom : 13px" required>{{ line2 }}</textarea>
+    <button type="submit" style="float:left; width:530px;" class="btn btn-primary">입력</button>
+  </form>
+  <div class="textarea_grid">
+    <textarea class="form-control" name="result1st" readonly>[  블루타이머 PICK!  ]
+      {% for penlistf in penlistf -%}
+      {{ penlistf }}
+      {% endfor -%}
+      {{ rpenfr }}
+    </textarea>
+    <textarea class="form-control" name="result2nd" readonly>[  금칙어 LIST  ]
+      {% for penlist1 in penlist1 -%}
+      {{  penlist1  }}
+      {% endfor -%}
+      {{  rpen1r  }}
+
+[  강조어 LIST  ]
+      {% for penlist3 in penlist3 -%}
+      {{  penlist3  }}
+      {% endfor -%}
+      {{  rpen3r  }}
+    </textarea>
+    <textarea class="form-control" name="result3rd" readonly>[  메인키워드  ]
+      {% for mainlist in mainlist -%}
+      {{  mainlist  }}
+      {% endfor %}
+    </textarea>
+  </div>
+  </div>
+{% endblock contents %}

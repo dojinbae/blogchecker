@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta name="naver-site-verification" content="a3478a926837d199c184f215fa355b1dc737576c" />
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+    <meta property="og:title" content="블로그체커 - 블루타이머">
+    <meta name="description" content="블로그 노출의 핵심">
+    <meta property="og:description" content="금칙어 검사 및 텍스트마이닝">
+    <meta name="keywords" content="블루타이머, 블로그체커, 금칙어, 블로그, blog, blogchecker, 최적화">
+    <meta property="og:url" content="http://blogchecker.co.kr/"> 
+    <meta property="og:site_name" content="블로그체커"/> 
+    <meta property="og:type" content="website"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블로그체커</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://js.tosspayments.com/v1"></script>
+    <style>
+    .main {
+      background: #3d3d3d;
+      padding: 80px;
+      padding-top: 80px;
+      padding-right: 0px;
+      padding-bottom: 80px;
+      padding-left: 00px;
+    }
+    .container{
+      max-width: 1800px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      background-color: white;
+      padding: 40px;
+      border-radius: 6px;
+    }
+    footer{
+      max-width: 1800px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding: 40px;
+      border-radius: 6px;
+    }
+    a {
+      text-decoration:none;
+      color: black;
+    }
+    .form {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 26px;
+      margin-bottom: 0px;
+      background-color: white;
+      border-radius: 6px;
+    }
+    .paybox {
+      padding: 10px;
+    }
+    h4 {
+      padding-bottom: 6px;
+    }
+    h4:after {
+      content: "";
+      display: block;
+      width: 100px;
+      border-bottom: 3px solid gray;
+      margin: 6px auto;
+    }
+    .cash {
+      font-size: 30px;
+    }
+    .btmbox {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      font-weight: bold;
+    }
+    </style>
+  </head>
+  <body class="text-center" style="background:#3d3d3d">
+    <div class=main>
+      <div class="container">
+        <header>
+            <div class="d-flex flex-wrap align-itmes-center justify-content-center">
+              <h1>
+                <a href="{{url_for('index')}}">BLOGCHECKER
+                </a>
+              </h1>
+            </div>
+          <div style="text-align:right;">
+            {% if user=="Login" %}
+            <a href="{{url_for('login')}}">
+              Login</a>
+            {% else %}
+            <span class="user">{{user}}님</span>
+            <a href="{{url_for('logout')}}">로그아웃</a>
+            {% endif %}
+          </div>
+        </header>
+        <section class="form">
+          <div class="paybox">
+            <h4> 베이직 </h4>
+            <p class="cash"><b>9,000원</b></p>
+            <p>이용일수 : 1일</p>
+            <p style="color: gray">&nbsp</p>
+            <button class="w-100 btn btn-lg btn-primary" onclick="pay('카드',jsons.card0);">베이직 이용권</button>
+          </div>
+          <div class="paybox">
+            <h4> 프로 </h4>
+            <p class="cash"><b>39,000원</b></p>
+            <p>이용일수 : 10일</p>
+            <p style="color: gray">1일 기준 : 3900원 (약 57% 할인)</p>
+            <button class="w-100 btn btn-lg btn-primary" onclick="pay('카드',jsons.card1);">프로 이용권</button>
+          </div>
+          <div class="paybox">
+            <h4> 프리미엄 </h4>
+            <p class="cash"><b>89,000원</b></p>
+            <p>이용일수 : 30일</p>
+            <p style="color: gray">1일 기준 : 2966원 (약 67% 할인)</p>
+            <button class="w-100 btn btn-lg btn-primary" onclick="pay('카드',jsons.card2);">프리미엄 이용권</button>
+          </div>
+        </section>
+      </div>
+      <div class = "container btmbox" style="margin-top: 13px; text-align:left">
+        <div>
+          <div>✔ 사용 가능한 기능</div>
+          <div>- 금칙어 체크</div>
+          <div>- 텍스트 마이닝</div>
+          <div>- 메인 키워드 체크</div>
+        </div>
+        <div>
+          <div>✔ 문의사항은 <a href="https://pf.kakao.com/_uzIxhxj" style="color:blue"><b><u>@Bluetimer</u></b></a>로 연락주세요.</div>
+          <div>✔ 결제 당일 1일권(9000원)을 제외한 금액으로만 환불이 가능합니다.<br>&nbsp&nbsp&nbsp이후에는 환불이 불가능합니다.</div>
+          <div>✔ 사용 중 이용권 변경을 불가능합니다.</div>
+          <div style="color:red">✔ 아이디 공유 적발 시에 이용 정지될 수 있습니다.</div>
+        </div>
+      </div>
+      <footer style="color:white; text-align:right; font-size: 13px">
+        · 상호명 : 진커뮤니티 · 사업자등록번호 : 735-06-02130 · 통신판매업신고 : 2021-서울송파-3324호<br>
+        · 책임자 : 배도진 · 주소 : 서울 송파구 백제고분로27길 11-9 · 연락처 : 010-8671-1584 · 메일 : gojo99257@naver.com
+      </footer>
+    </div>
+  </body>
+
+  <script>
+    let amount0 = {{amount0}};
+    let amount1 = {{amount1}};
+    let amount2 = {{amount2}};
+    let tossPayments = TossPayments("live_ck_N5OWRapdA8dEMgaZw6n3o1zEqZKL");  //atech001 testKey
+
+    function pay(method, requestJson) {
+        console.log(requestJson);
+        tossPayments.requestPayment(method, requestJson)
+            .catch(function (error) {
+
+                if (error.code === "USER_CANCEL") {
+                    alert('유저가 취소했습니다.');
+                } else {
+                    alert(error.message);
+                }
+
+            });    }
+
+    let path = "/";
+    let successUrl = window.location.origin + path + "paycheck/success";
+    let failUrl = window.location.origin + path + "paycheck/fail";
+    let callbackUrl = window.location.origin + path + "va_callback";
+    let orderId = new Date().getTime();
+
+    let jsons = {
+        "card0": {
+            "amount": amount0,
+            "orderId": orderId,
+            "orderName": "베이직 이용권",
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "cardCompany": null,
+            "cardInstallmentPlan": null,
+            "maxCardInstallmentPlan": null,
+            "useCardPoint": false,
+            "customerName": null,
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": 0,
+            "useInternationalCardOnly": false,
+            "discountCode": null,
+            "taxExemptionAmount": 0,
+            "appScheme": null
+        },
+        "card1": {
+            "amount": amount1,
+            "orderId": orderId,
+            "orderName": "프로 이용권",
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "cardCompany": null,
+            "cardInstallmentPlan": null,
+            "maxCardInstallmentPlan": null,
+            "useCardPoint": false,
+            "customerName": null,
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": 0,
+            "useInternationalCardOnly": false,
+            "discountCode": null,
+            "taxExemptionAmount": 0,
+            "appScheme": null
+        },
+        "card2": {
+            "amount": amount2,
+            "orderId": orderId,
+            "orderName": "프리미엄 이용권",
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "cardCompany": null,
+            "cardInstallmentPlan": null,
+            "maxCardInstallmentPlan": null,
+            "useCardPoint": false,
+            "customerName": null,
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": 0,
+            "useInternationalCardOnly": false,
+            "discountCode": null,
+            "taxExemptionAmount": 0,
+            "appScheme": null
+        }
+      }
+      </script>
+</html>

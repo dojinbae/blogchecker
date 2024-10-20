@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+  textarea {
+    height : 200px;
+  }
+</style>
+<div>
+  <form style="margin-bottom : 26px" class="row g-3" action="{{url_for('rank')}}" method="POST">
+    <div class="col-auto">
+      <label for="blogid" class="visually-hidden">블로그 아이디</label>
+      <input type="text" class="form-control" name = 'blogid' placeholder="블로그 아이디" style="width:200px" required>
+    </div>
+    <div class="col-auto">
+      <label for="kwd" class="visually-hidden">키워드</label>
+      <input type="text" class="form-control" name = 'kwd' placeholder="키워드" style="width:200px" required>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">입력</button>
+    </div>
+  </form>
+</div>
+<div class='grid'>
+  <table class="table" style="width:500px">
+    <tbody>
+      <script>
+        var td = ['준', '비', '중', '.', '.', '.'];
+        var th = ['문서 발행량', '토탈 검색량', 'PC 검색량', 'Mobile 검색량', '경쟁 강도']
+        for (i = 0; i < th.length; i++){
+          document.write('<tr>');
+            document.write('<th scope="col">' + th[i] + '</th>');
+            document.write('<td>' + td[i] + '</td>');
+          document.write('</th>');
+        }
+      </script>
+    </tbody>
+  </table>
+  <div style="width:100%; height:200px; overflow:auto">
+    <table class="table">
+      <thead>
+        <tr>
+          <script>
+            var th = ['순위', '발행일', '제목'];
+            for (i = 0; i < th.length; i++){
+              document.write('<th scope="col">' + th[i] + '</th>');
+            }
+          </script>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in mybloglist %}
+        <tr>
+          {% for cell in row %}
+          <td> {{ cell }} </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div style="height:200px; overflow:auto">
+    <table class="table">
+      <thead>
+        <tr>
+          <script>
+            var th = ['순위', '발행일', '제목'];
+            for (i = 0; i < th.length; i++){
+              document.write('<th scope="col">' + th[i] + '</th>');
+            }
+          </script>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in bloglist %}
+        <tr>
+          {% for cell in row %}
+          <td> {{ cell }} </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock contents %}
